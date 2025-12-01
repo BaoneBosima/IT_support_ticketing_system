@@ -1,0 +1,26 @@
+ticket_id,title,description,fix
+TCK-1001,VPN unable to connect,User cannot connect to corporate VPN from home office,Reset VPN profile and enforce MFA re-enrollment
+TCK-1002,Email bounce backs,Outgoing emails to external partners bounce with SPF failure,Update SPF record and clear cached credentials in Outlook
+TCK-1003,Laptop running slow,Finance laptop takes five minutes to boot and apps freeze,Remove startup bloatware and upgrade SSD firmware
+TCK-1004,Printer offline,Floor 3 HP LaserJet shows offline for all users,Power cycle printer and restart Print Spooler service
+TCK-1005,Wi-Fi drops,Conference room Wi-Fi disconnects every 10 minutes,Adjust AP channel width and disable power saving on NIC
+TCK-1006,Software crash,AutoCAD closes unexpectedly when loading templates,Reinstall Visual C++ redistributables and clear temp cache
+TCK-1007,Disk full warning,Engineering workstation reports disk full at 95%,Run WinDirStat and archive log files to NAS
+TCK-1008,Outlook search broken,User search returns no results after OST rebuild,Rebuild Windows Search index and reset Outlook profile
+TCK-1009,Monitor flickering,Dual monitor setup flickers when docking laptop,Update Intel graphics driver and replace DP cable
+TCK-1010,Network share denied,Access to \\fileserver\\projects fails with permission error,Reapply AD security group membership and force gpupdate
+TCK-1011,Blue screen error,BSOD with STOP CODE DRIVER_IRQL_NOT_LESS_OR_EQUAL,Update Wi-Fi driver and run memory diagnostics
+TCK-1012,Teams call echo,Remote participants hear echo from meeting room mic,Lower speaker volume and enable acoustic echo cancellation
+TCK-1013,VPN MFA timeout,Users get MFA timeout on Pulse Secure client,Increase timeout setting on VPN appliance and rotate push channel
+TCK-1014,Password sync delay,Password changes take hours to sync to Office365,Restart Azure AD Connect sync service and run delta sync
+TCK-1015,File corruption warning,Excel warns about corrupted shared workbook,Restore from previous version and disable legacy macros
+TCK-1016,Camera not detected,Built-in webcam missing after Windows update,Enable device in BIOS and reinstall OEM camera driver
+TCK-1017,SSH latency,Developers experience lag over SSH to build server,Investigate packet loss and enable TCP window scaling
+TCK-1018,VPN split tunnel request,User needs access to streaming while on VPN,Add exception to split tunnel policy for specific domains
+TCK-1019,Password manager crash,1Password desktop client closes immediately,Clear local vault cache and reinstall latest build
+TCK-1020,USB device blocked,Photoshop tablet blocked by Device Guard,Create device installation policy and allow hardware ID
+TCK-1021,Proxy authentication loop,Browser keeps prompting for proxy credentials,Reset IE settings and clear Windows Credential Manager
+TCK-1022,Remote desktop lag,RDP session to accounting server is choppy,Enable UDP transport and set bandwidth limit to auto
+TCK-1023,Outlook add-in disabled,Zoom add-in keeps getting disabled at startup,Set add-in load behavior to 3 and whitelist in Trust Center
+TCK-1024,VPN certificate expired,GlobalProtect shows certificate expired error,Issue new client cert from PKI and push via Intune
+
