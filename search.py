@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+import re
 
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -13,6 +14,13 @@ from sklearn.metrics.pairwise import linear_kernel
 
 TICKET_FILE = Path(__file__).with_name("tickets.csv")
 TOP_K = 3
+SENSITIVE_PATTERNS = [
+    (re.compile(r"\bpassword\b", re.IGNORECASE), "keyword 'password'"),
+    (re.compile(r"\bssn\b", re.IGNORECASE), "keyword 'ssn'"),
+    (re.compile(r"\bcredit\s*card\b", re.IGNORECASE), "keyword 'credit card'"),
+    (re.compile(r"\b\d{3}-\d{2}-\d{4}\b"), "SSN-like pattern"),
+    (re.compile(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}", re.IGNORECASE), "email address"),
+]
 
 
 def load_tickets(csv_path: Path) -> pd.DataFrame:
@@ -24,6 +32,7 @@ def load_tickets(csv_path: Path) -> pd.DataFrame:
     df["description"] = df["description"].fillna("")
     df["fix"] = df["fix"].fillna("No fix captured.")
     df["search_text"] = df["title"] + " " + df["description"]
+    _validate_no_sensitive_text(df)
     return df
 
 
@@ -82,6 +91,15 @@ def main() -> int:
     vectorizer, tfidf_matrix = build_model(df["search_text"])
     run_search_loop(df, vectorizer, tfidf_matrix)
     return 0
+
+
+def _validate_no_sensitive_text(df: pd.DataFrame) -> None:
+    """Scan ticket text for sensitive indicators and abort if any found."""
+    combined = " ".join(df["title"].tolist() + df["description"].tolist() + df["fix"].tolist())
+    for pattern, description in SENSITIVE_PATTERNS:
+        match = pattern.search(combined)
+        if match:
+            raise ValueError(f"Sensitive data detected ({description}). Remove it before running search.")
 
 
 if __name__ == "__main__":
